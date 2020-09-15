@@ -1,0 +1,12 @@
+{
+	"client":{
+		"cp_id":"1340007000008415566",
+		"product_id":"736430079244627371",
+		"client_id":"447132893525836992",
+		"client_secret":"D51F30A0A17D8467ED52736D21529E4BC50EDC67339CF8203611590DFC123252",
+		"app_id":"102874861",
+		"package_name":"com.huawei.sitekit.kotlin",
+		"api_key":"CgB6e3x9vp/J7ul1nf8RBE90+OFisr8o3S46hBNuG5SRMO08lupXwNZrV4Qbo4QABDn6D3UHGWAKXwCJq96dFXHZ"
+	},
+	"configuration_version":"1.0"
+}
