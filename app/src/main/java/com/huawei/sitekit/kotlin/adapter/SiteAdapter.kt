@@ -36,9 +36,7 @@ class SiteAdapter : RecyclerView.Adapter<SiteViewHolder>() {
         holder.bind(observables[position])
     }
 
-    override fun getItemCount(): Int {
-        return observables.size
-    }
+    override fun getItemCount() = observables.size
 
     inner class SiteViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {

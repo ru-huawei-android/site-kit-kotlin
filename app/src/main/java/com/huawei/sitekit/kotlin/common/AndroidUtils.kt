@@ -11,12 +11,14 @@ import androidx.transition.TransitionManager
 
 object AndroidUtils {
 
+    private const val ANIMATION_DURATION = 300L
+
     fun changeFilterVisible(parent: ConstraintLayout, child: View) {
         val height = (child.layoutParams as ConstraintLayout.LayoutParams).height
         val newConstrainedHeight = if (height == 0) ConstraintSet.WRAP_CONTENT else 0
 
         val autoTransition = AutoTransition().apply {
-            duration = 300
+            duration = ANIMATION_DURATION
         }
 
         TransitionManager.beginDelayedTransition(parent, autoTransition)
