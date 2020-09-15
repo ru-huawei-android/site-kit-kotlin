@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity(), TabConfigurationStrategy {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> KeywordSearchFragment()
-                1 -> NearbySearchFragment()
-                2 -> PlaceDetailFragment()
+                KEYWORD_SEARCH_INDEX -> KeywordSearchFragment()
+                NEARBY_SEARCH_INDEX -> NearbySearchFragment()
+                PLACE_DETAIL_INDEX -> PlaceDetailFragment()
                 else -> QuerySuggestionFragment()
             }
         }
@@ -55,6 +55,10 @@ class MainActivity : AppCompatActivity(), TabConfigurationStrategy {
 
         companion object {
             private const val PAGE_COUNT = 4
+
+            const val KEYWORD_SEARCH_INDEX = 0
+            const val NEARBY_SEARCH_INDEX = 1
+            const val PLACE_DETAIL_INDEX = 2
         }
     }
 }
