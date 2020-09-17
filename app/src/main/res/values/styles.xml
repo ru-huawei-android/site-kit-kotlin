@@ -15,4 +15,12 @@
         <item name="hintTextColor">@color/colorAccent</item>
     </style>
 
+
+    <style name="TextInputEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@drawable/cursor_drawable</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
+        <item name="android:ems">10</item>
+    </style>
+
 </resources>

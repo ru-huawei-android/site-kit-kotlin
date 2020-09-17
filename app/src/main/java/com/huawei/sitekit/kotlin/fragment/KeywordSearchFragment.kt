@@ -34,8 +34,6 @@ class KeywordSearchFragment : Fragment(), SiteCallback {
         SiteAdapter()
     }
 
-    private var converterLocationType: Map<String, LocationType> = emptyMap()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,13 +43,6 @@ class KeywordSearchFragment : Fragment(), SiteCallback {
 
         view.editTextRadius.filters = arrayOf<InputFilter>(InputFilterMinMax(1, 50000))
 
-        view.buttonFilter.setOnClickListener {
-            AndroidUtils.changeFilterVisible(
-                view.constraintLayoutKeyword,
-                view.constraintLayoutFilter
-            )
-        }
-
         view.buttonSearch.setOnClickListener { search() }
         adapterResult.setCallback(this)
 
@@ -60,8 +51,10 @@ class KeywordSearchFragment : Fragment(), SiteCallback {
             layoutManager = LinearLayoutManager(context)
         }
 
-        converterLocationType = LocationType.values().associateBy { it.name }
-        val data = converterLocationType.keys.toTypedArray()
+        val data = LocationType.values().map { it.name }.toMutableList().apply {
+            add(0, Config.DEFAULT_LOCATION_TYPE)
+        }.toTypedArray()
+
         val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, data).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
@@ -75,26 +68,34 @@ class KeywordSearchFragment : Fragment(), SiteCallback {
      * Search method
      */
     private fun search() {
+        val queryText = view?.editTextKeywordQuery?.text?.toString()?.trim()
+
+        if (queryText.isNullOrEmpty()) {
+            Toast.makeText(context, getString(R.string.enter_query), Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val latitude = view?.editTextLocationLatitude?.text
             ?.toString()?.takeUnless { it.isEmpty() }?.toDouble()
         val longitude = view?.editTextLocationLongitude?.text
             ?.toString()?.takeUnless { it.isEmpty() }?.toDouble()
         val radiusValue = view?.editTextRadius?.text?.toString()
             ?.takeUnless { it.isEmpty() }?.toInt()
-        val locationType = view?.spinnerLocationType?.selectedItem as? String
+        val locationType = view?.spinnerLocationType?.selectedItem
+            ?.toString()?.takeUnless { it == Config.DEFAULT_LOCATION_TYPE }
 
         val request = TextSearchRequest().apply {
-            query = view?.editTextKeywordQuery?.text.toString().trim { it <= ' ' }
+            query = queryText
 
             if (latitude != null && longitude != null) {
                 location = Coordinate(latitude, longitude)
             }
 
             radius = radiusValue
-            poiType = converterLocationType[locationType]
-            countryCode = "En"
-            language = "en"
-            pageSize = 10
+            poiType = locationType?.let { LocationType.valueOf(it) }
+            countryCode = Config.DEFAULT_COUNTRY_CODE
+            language = Config.DEFAULT_LANGUAGE
+            pageSize = Config.DEFAULT_PAGE_COUNT
         }
 
         searchService.textSearch(request, resultListener)

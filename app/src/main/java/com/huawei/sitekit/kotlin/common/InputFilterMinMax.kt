@@ -12,10 +12,10 @@ class InputFilterMinMax(private val min: Int, private val max: Int) : InputFilte
         dest: Spanned,
         dStart: Int,
         dEnd: Int
-    ): CharSequence {
+    ): CharSequence? {
         try {
             val input = (dest.toString() + source.toString()).toInt()
-            if (isInRange(min, max, input)) return ""
+            if (isInRange(min, max, input)) return null
         } catch (nfe: NumberFormatException) {
             nfe.printStackTrace()
         }

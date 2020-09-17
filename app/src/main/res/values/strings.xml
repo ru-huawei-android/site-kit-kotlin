@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">Site Kit Sample (Kotlin)</string>
     <string name="query">Query</string>
-    <string name="filter">Filter</string>
     <string name="location_latitude">Location Latitude</string>
     <string name="location_longitude">Location Longitude</string>
     <string name="radius_1_50000">Radius (1–50000)</string>
     <string name="search">Search</string>
     <string name="site_id">Site ID</string>
+    <string name="default_longitude">37.618423</string>
+    <string name="default_latitude">55.751244</string>
+    <string name="enter_query">Entry query</string>
+    <string name="enter_location">Enter location</string>
 
     <string-array name="tabs_title">
         <item>Keyword</item>
