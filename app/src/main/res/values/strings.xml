@@ -10,6 +10,8 @@
     <string name="default_latitude">55.751244</string>
     <string name="enter_query">Entry query</string>
     <string name="enter_location">Enter location</string>
+    <string name="empty_response">empty response</string>
+    <string name="enter_site_id">Enter Site ID</string>
 
     <string-array name="tabs_title">
         <item>Keyword</item>

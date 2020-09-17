@@ -2,6 +2,7 @@ package com.huawei.sitekit.kotlin.fragment
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,7 +98,6 @@ class NearbySearchFragment : Fragment(), SiteCallback {
         }
 
         searchService.nearbySearch(request, resultListener)
-
     }
 
     private var resultListener: SearchResultListener<NearbySearchResponse> =
@@ -106,9 +106,16 @@ class NearbySearchFragment : Fragment(), SiteCallback {
             override fun onSearchResult(results: NearbySearchResponse) {
                 val observables = results.sites.map { SiteObservable.fromSite(it) }
                 adapterResult.setList(observables)
+
+                if (observables.isEmpty()) {
+                    Toast.makeText(context, R.string.empty_response, Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onSearchError(status: SearchStatus) {
+                val message = "Error: " + status.errorCode
+                Log.e(TAG, message)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 adapterResult.setList(emptyList())
             }
         }
@@ -117,5 +124,9 @@ class NearbySearchFragment : Fragment(), SiteCallback {
         val message = "Site ID " + observable.siteId + " has been saved to clipboard."
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         AndroidUtils.saveToClipboard(requireContext(), observable.siteId)
+    }
+
+    companion object {
+        private const val TAG = "NEARBY_SEARCH_FRAGMENT"
     }
 }

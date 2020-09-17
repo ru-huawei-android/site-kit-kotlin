@@ -106,10 +106,16 @@ class KeywordSearchFragment : Fragment(), SiteCallback {
             override fun onSearchResult(results: TextSearchResponse) {
                 val observables = results.sites.map { SiteObservable.fromSite(it) }
                 adapterResult.setList(observables)
+
+                if (observables.isEmpty()) {
+                    Toast.makeText(context, R.string.empty_response, Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onSearchError(status: SearchStatus) {
-                Log.e(TAG, "Error: " + status.errorCode + " - " + status.errorMessage)
+                val message = "Error: " + status.errorCode
+                Log.e(TAG, message)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 adapterResult.setList(emptyList())
             }
         }

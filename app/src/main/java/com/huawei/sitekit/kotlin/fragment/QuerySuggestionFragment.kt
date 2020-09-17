@@ -24,7 +24,6 @@ import com.huawei.sitekit.kotlin.common.AndroidUtils
 import com.huawei.sitekit.kotlin.common.Config
 import com.huawei.sitekit.kotlin.common.InputFilterMinMax
 import kotlinx.android.synthetic.main.fragment_query_suggestion.view.*
-import java.util.*
 
 class QuerySuggestionFragment : Fragment(), SiteCallback {
 
@@ -115,11 +114,17 @@ class QuerySuggestionFragment : Fragment(), SiteCallback {
             override fun onSearchResult(results: QuerySuggestionResponse) {
                 val observables = results.sites?.map { SiteObservable.fromSite(it) } ?: emptyList()
                 adapterResult.setList(observables)
+
+                if (observables.isEmpty()) {
+                    Toast.makeText(context, R.string.empty_response, Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onSearchError(status: SearchStatus) {
-                Log.e(TAG, "Error: " + status.errorCode + " - " + status.errorMessage)
-                adapterResult.setList(ArrayList())
+                val message = "Error: " + status.errorCode
+                Log.e(TAG, message)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                adapterResult.setList(emptyList())
             }
         }
 
