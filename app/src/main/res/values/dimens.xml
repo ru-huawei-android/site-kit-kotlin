@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="strokeWidth">1dp</dimen>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="textSizeResult">14sp</dimen>
+    <dimen name="padding">4dp</dimen>
+</resources>
