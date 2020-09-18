@@ -113,7 +113,7 @@ class NearbySearchFragment : Fragment(), SiteCallback {
             }
 
             override fun onSearchError(status: SearchStatus) {
-                val message = "Error: " + status.errorCode
+                val message = getString(R.string.toast_error, status.errorCode)
                 Log.e(TAG, message)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 adapterResult.setList(emptyList())
@@ -121,7 +121,7 @@ class NearbySearchFragment : Fragment(), SiteCallback {
         }
 
     override fun onSiteItemClicked(observable: SiteObservable) {
-        val message = "Site ID " + observable.siteId + " has been saved to clipboard."
+        val message = getString(R.string.toast_site_id_clipboard, observable.siteId)
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         AndroidUtils.saveToClipboard(requireContext(), observable.siteId)
     }

@@ -12,6 +12,8 @@
     <string name="enter_location">Enter location</string>
     <string name="empty_response">empty response</string>
     <string name="enter_site_id">Enter Site ID</string>
+    <string name="toast_error">Error: %s</string>
+    <string name="toast_site_id_clipboard">Site ID %s has been saved to clipboard.</string>
 
     <string-array name="tabs_title">
         <item>Keyword</item>

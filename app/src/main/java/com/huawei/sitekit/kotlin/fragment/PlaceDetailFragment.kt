@@ -69,7 +69,7 @@ class PlaceDetailFragment : Fragment() {
             }
 
             override fun onSearchError(status: SearchStatus) {
-                val message = "Error: " + status.errorCode
+                val message = getString(R.string.toast_error, status.errorCode)
                 Log.e(TAG, message)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 view?.textViewDetailResult?.text = ""
