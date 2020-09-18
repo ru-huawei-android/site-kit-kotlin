@@ -17,10 +17,10 @@ android {
 
     signingConfigs {
         config {
-            storeFile file('SiteKitDemo.jks')
-            storePassword 'sitekitdemo'
-            keyAlias 'sitekitdemo'
-            keyPassword 'sitekitdemo'
+            storeFile file('HuaweiSampleKey.jks')
+            storePassword 'HuaweiSampleKey'
+            keyAlias 'HuaweiSampleKey'
+            keyPassword 'HuaweiSampleKey'
             v1SigningEnabled true
             v2SigningEnabled true
         }
